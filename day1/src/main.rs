@@ -2,12 +2,10 @@ fn main() {
     let result: i32 = std::fs::read_to_string("input")
         .unwrap()
         .trim()
-        .split("
-
-")
+        .split("\n\n")
         .map(|chunk| {
             chunk
-                .split(n)
+                .split("\n")
                 .map(|line| str::parse::<i32>(line).unwrap())
                 .sum()
         })
