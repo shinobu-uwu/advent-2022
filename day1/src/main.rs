@@ -1,16 +1,23 @@
+use itertools::Itertools;
+
 fn main() {
-    let result: i32 = std::fs::read_to_string("input")
+    let vec: Vec<i32> = std::fs::read_to_string("input")
         .unwrap()
         .trim()
         .split("\n\n")
-        .map(|chunk| {
+        .map(|chunk| -> i32 {
             chunk
-                .split("\n")
+                .split('\n')
                 .map(|line| str::parse::<i32>(line).unwrap())
                 .sum()
         })
-        .max()
-        .unwrap();
+        .sorted()
+        .rev()
+        .collect();
 
-    println!("{}", result);
+    println!(
+        "Part 1: {}\nPart 2: {}",
+        vec[0],
+        vec.as_slice()[..3].iter().sum::<i32>()
+    );
 }
